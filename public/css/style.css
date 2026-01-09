@@ -72,8 +72,8 @@ body {
 }
 
 .profile-image {
-    width: 280px;
-    height: 280px;
+    width: 350px;
+    height: 350px;
     max-width: 100%;
     border-radius: 50%;
     object-fit: cover;
