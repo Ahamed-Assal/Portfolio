@@ -97,12 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * Show alert message (using function from main.js if available, otherwise define locally)
  */
 function showAlert(message, type = 'info', container) {
-    if (typeof window.showAlert === 'function') {
-        window.showAlert(message, type, container);
-        return;
-    }
-
-    // Fallback implementation
+    // Always use the local showAlert function, not the one from main.js
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
     alertDiv.setAttribute('role', 'alert');
