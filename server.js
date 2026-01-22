@@ -12,6 +12,9 @@ require('dotenv').config();
 // Import database connection and routes
 const db = require('./backend/database');
 const contactRoutes = require('./backend/routes/contact');
+const projectRoutes = require('./backend/routes/projects');
+const skillRoutes = require('./backend/routes/skills');
+const analyticsRoutes = require('./backend/routes/analytics');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.use('/api/contact', contactRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/skills', skillRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Serve HTML pages
 app.get('/', (req, res) => {

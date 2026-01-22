@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
 
         try {
+            console.log('Submitting form with data:', formData);
+            
             // Send data to backend API
             const response = await fetch('/api/contact', {
                 method: 'POST',
@@ -56,14 +58,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(formData)
             });
 
+            console.log('Response status:', response.status);
             const data = await response.json();
+            console.log('Response data:', data);
 
             if (response.ok && data.success) {
                 // Success - show success message and reset form
+                console.log('Success! Message sent:', data);
                 showAlert(data.message || 'Your message has been sent successfully!', 'success', alertContainer);
                 contactForm.reset();
+                
+                // Keep success message visible longer
+                setTimeout(() => {
+                    const successAlert = document.querySelector('#alert-container .alert-success');
+                    if (successAlert) {
+                        console.log('Success alert found:', successAlert);
+                    }
+                }, 100);
             } else {
                 // Error - show error message
+                console.log('Error response:', data);
                 showAlert(data.error || 'Failed to send message. Please try again.', 'danger', alertContainer);
             }
         } catch (error) {
@@ -92,8 +106,23 @@ function showAlert(message, type = 'info', container) {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
     alertDiv.setAttribute('role', 'alert');
+    
+    // Make success messages more prominent
+    if (type === 'success') {
+        alertDiv.style.cssText = `
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+            border-left: 4px solid #28a745;
+        `;
+    }
+    
     alertDiv.innerHTML = `
-        ${message}
+        <div class="d-flex align-items-center">
+            <i class="bi ${type === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'} me-2"></i>
+            <div>${message}</div>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     `;
     
@@ -102,7 +131,8 @@ function showAlert(message, type = 'info', container) {
         container.appendChild(alertDiv);
     }
     
-    // Auto-dismiss after 5 seconds
+    // Auto-dismiss after longer time for success messages
+    const dismissTime = type === 'success' ? 10000 : 5000; // 10 seconds for success, 5 for errors
     setTimeout(() => {
         if (alertDiv.parentNode) {
             alertDiv.classList.remove('show');
@@ -112,5 +142,5 @@ function showAlert(message, type = 'info', container) {
                 }
             }, 150);
         }
-    }, 5000);
+    }, dismissTime);
 }
