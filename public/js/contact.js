@@ -49,36 +49,50 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             console.log('Submitting form with data:', formData);
             
-            // Send data to backend API
-            const response = await fetch('/api/contact', {
+            // For GitHub Pages, use Formspree instead of local API
+            const formspreeEndpoint = 'https://formspree.io/f/xlggyegw';
+            
+            // Send data to Formspree
+            const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
 
             console.log('Response status:', response.status);
-            const data = await response.json();
-            console.log('Response data:', data);
-
-            if (response.ok && data.success) {
+            
+            if (response.ok) {
                 // Success - show success message and reset form
-                console.log('Success! Message sent:', data);
-                showAlert(data.message || 'Your message has been sent successfully!', 'success', alertContainer);
+                console.log('Success! Message sent via Formspree');
+                showAlert('Your message has been sent successfully! I\'ll get back to you soon.', 'success', alertContainer);
                 contactForm.reset();
-                
-                // Keep success message visible longer
-                setTimeout(() => {
-                    const successAlert = document.querySelector('#alert-container .alert-success');
-                    if (successAlert) {
-                        console.log('Success alert found:', successAlert);
-                    }
-                }, 100);
             } else {
-                // Error - show error message
-                console.log('Error response:', data);
-                showAlert(data.error || 'Failed to send message. Please try again.', 'danger', alertContainer);
+                // Try local API as fallback (for development)
+                try {
+                    const localResponse = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const localData = await localResponse.json();
+                    console.log('Local API response:', localData);
+
+                    if (localResponse.ok && localData.success) {
+                        showAlert(localData.message || 'Your message has been sent successfully!', 'success', alertContainer);
+                        contactForm.reset();
+                    } else {
+                        showAlert(localData.error || 'Failed to send message. Please try again.', 'danger', alertContainer);
+                    }
+                } catch (localError) {
+                    console.error('Local API also failed:', localError);
+                    showAlert('Please set up Formspree or run the local server to send messages.', 'danger', alertContainer);
+                }
             }
         } catch (error) {
             // Network or other error
