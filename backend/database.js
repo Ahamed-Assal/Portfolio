@@ -153,7 +153,11 @@ async function insertSampleData() {
                 ['Node.js', 'Backend', 4, 'bi-node-plus'],
                 ['Express.js', 'Backend', 4, 'bi-gear'],
                 ['Python', 'Backend', 3, 'bi-filetype-py'],
+                ['PHP', 'Backend', 3, 'bi-filetype-php'],
+                ['C#', 'Backend', 3, 'bi-filetype-cs'],
                 ['PostgreSQL', 'Database', 4, 'bi-database-check'],
+                ['MySQL', 'Database', 3, 'bi-database-fill-gear'],
+                ['SQL', 'Database', 4, 'bi-diagram-3'],
                 ['Git', 'Tools', 4, 'bi-git'],
                 ['Linux', 'Tools', 3, 'bi-ubuntu']
             ];
@@ -193,6 +197,22 @@ async function insertSampleData() {
                     'E-Commerce Platform',
                     'A full-stack e-commerce application with user authentication, product management, and shopping cart functionality.',
                     '{JavaScript, "Node.js", PostgreSQL}',
+                    null,
+                    null,
+                    false
+                ],
+                [
+                    'Ticketing System',
+                    'A comprehensive ticketing system built with C# and .NET, featuring user management, ticket creation, assignment, and tracking capabilities.',
+                    '{C#, ".NET", "SQL Server", "Entity Framework"}',
+                    null,
+                    null,
+                    false
+                ],
+                [
+                    'Mobile Shop Website',
+                    'A modern e-commerce website for mobile devices with product catalog, shopping cart, user authentication, and payment integration.',
+                    '{HTML5, CSS3, JavaScript, React, "Node.js"}',
                     null,
                     null,
                     false
