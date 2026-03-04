@@ -147,7 +147,6 @@ body > * {
         radial-gradient(circle at 80% 20%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
         url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
     background-size: cover;
-    animation: heroAnimation 20s ease-in-out infinite;
 }
 
 @keyframes heroAnimation {
@@ -159,14 +158,12 @@ body > * {
     color: var(--text-light);
     font-weight: 800;
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-    animation: slideInLeft 1s ease-out;
     font-family: 'Space Grotesk', 'Inter', sans-serif;
     letter-spacing: -0.03em;
     line-height: 1.1;
 }
 
 .hero-content p {
-    animation: slideInLeft 1.2s ease-out;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1.1rem;
@@ -174,9 +171,6 @@ body > * {
     letter-spacing: -0.005em;
 }
 
-.hero-buttons {
-    animation: slideInLeft 1.4s ease-out;
-}
 
 @keyframes slideInLeft {
     from {
@@ -208,7 +202,6 @@ body > * {
     height: 3px;
     background: var(--gradient-secondary);
     border-radius: 2px;
-    animation: underlineGrow 1s ease-out 0.5s both;
 }
 
 @keyframes underlineGrow {
@@ -250,9 +243,6 @@ body > * {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.profile-placeholder {
-    animation: float 3s ease-in-out infinite, slideInRight 1s ease-out;
-}
 
 @keyframes slideInRight {
     from {
@@ -289,7 +279,6 @@ body > * {
     border-radius: 50%;
     border: 2px solid transparent;
     border-top-color: var(--highlight-color);
-    animation: rotate 2s linear infinite;
     z-index: -1;
 }
 
@@ -347,72 +336,80 @@ body > * {
     background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
 }
 
-/* Card Styles */
+/* Card Styles - no hover effects on card content */
 .card {
     border: none;
     box-shadow: var(--shadow-soft);
-    transition: all 0.4s ease;
+    transition: none;
+    pointer-events: auto;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(15px);
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none !important;
+}
+
+.card:focus,
+.card:focus-visible {
+    outline: none !important;
 }
 
 .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
-    transition: left 0.6s ease;
+    display: none;
 }
 
-.card:hover::before {
-    left: 100%;
+.card:hover,
+.card:hover .card-title,
+.card:hover .card-body,
+.card:hover .card-body *,
+.card:hover h3,
+.card:hover h5,
+.card:hover i,
+.card:hover .project-icon,
+.card:hover .project-icon i {
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
 }
 
 .card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: var(--shadow-large), 0 0 30px rgba(233, 69, 96, 0.2);
-    border-color: rgba(233, 69, 96, 0.3);
+    box-shadow: var(--shadow-soft) !important;
 }
 
 .skill-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: none;
     position: relative;
     overflow: hidden;
+    outline: none !important;
+}
+
+.skill-card:focus,
+.skill-card:focus-visible {
+    outline: none !important;
 }
 
 .skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-    transition: transform 0.6s ease;
-}
-
-.skill-card:hover::after {
-    transform: scale(1);
+    display: none;
 }
 
 .skill-card i {
     margin-bottom: 15px;
-    transition: all 0.4s ease;
+    transition: none;
     display: inline-block;
 }
 
-.skill-card:hover i {
-    transform: scale(1.3) rotate(10deg);
-    color: var(--highlight-color) !important;
-    filter: drop-shadow(0 5px 15px rgba(233, 69, 96, 0.3));
+.skill-card:hover,
+.skill-card:hover i,
+.skill-card:hover h5,
+.skill-card:hover .card-title,
+.skill-card:hover .card-body {
+    transform: none !important;
+    color: inherit !important;
+    filter: none !important;
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .card-title {
@@ -427,62 +424,49 @@ body > * {
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.3;
-    transition: all 0.3s ease;
+    transition: none;
 }
 
-.skill-card:hover h5 {
-    color: var(--highlight-color);
-    transform: translateY(-2px);
-}
 
 .project-card {
-    transition: all 0.4s ease;
+    transition: none;
     position: relative;
     overflow: hidden;
     border-radius: 20px;
+    outline: none !important;
+}
+
+.project-card:focus,
+.project-card:focus-visible {
+    outline: none !important;
 }
 
 .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-secondary);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    transform-origin: left;
+    display: none;
 }
 
-.project-card:hover::before {
-    transform: scaleX(1);
-}
-
-.project-card:hover {
-    transform: translateY(-20px) scale(1.03);
-    box-shadow: var(--shadow-large), 0 0 40px rgba(233, 69, 96, 0.3);
+.project-card:hover,
+.project-card:hover .card-title,
+.project-card:hover .project-icon,
+.project-card:hover .project-icon i,
+.project-card:hover .card-body,
+.project-card:hover h5 {
+    transform: none !important;
+    box-shadow: var(--shadow-soft);
+    transition: none !important;
+    color: inherit !important;
+    filter: none !important;
 }
 
 .project-card .card-title {
-    transition: all 0.3s ease;
+    transition: none;
     font-weight: 600;
 }
 
-.project-card:hover .card-title {
-    color: var(--highlight-color);
-    transform: translateY(-2px);
-}
-
 .project-icon i {
-    transition: all 0.4s ease;
+    transition: none;
 }
 
-.project-card:hover .project-icon i {
-    transform: scale(1.2) rotate(5deg);
-    color: var(--highlight-color) !important;
-    filter: drop-shadow(0 5px 15px rgba(233, 69, 96, 0.3));
-}
 
 .project-icon {
     text-align: center;
@@ -917,9 +901,6 @@ html {
     }
 }
 
-.content-section {
-    animation: fadeIn 0.6s ease-out;
-}
 
 .stat-item {
     transition: all 0.3s ease;
@@ -930,13 +911,7 @@ html {
 }
 
 .stat-item h3 {
-    animation: countUp 1s ease-out;
     transition: all 0.3s ease;
-}
-
-.stat-item:hover h3 {
-    animation: pulse 0.6s ease-in-out infinite;
-    color: #fbbf24 !important;
 }
 
 /* Project links styling */
@@ -1035,30 +1010,22 @@ html {
     box-shadow: 0 0 30px rgba(233, 69, 96, 0.6);
 }
 
-/* Enhanced Interactive Animations */
+/* Card hover effects disabled globally */
 .skill-card:hover {
-    transform: translateY(-15px) scale(1.05) rotateY(5deg);
-    box-shadow: 0 20px 40px rgba(233, 69, 96, 0.3);
-    border: 2px solid var(--highlight-color);
-}
-
-.skill-card:hover::before {
-    left: 100%;
+    transform: none;
+    box-shadow: none;
+    transition: none;
 }
 
 .project-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 25px 50px rgba(233, 69, 96, 0.25);
-    border: 2px solid var(--highlight-color);
-}
-
-.project-card:hover .project-icon {
-    animation: float 2s ease-in-out infinite;
+    transform: none;
+    box-shadow: var(--shadow-soft);
+    transition: none;
 }
 
 .project-card:hover .project-icon i {
-    color: var(--highlight-color);
-    transform: scale(1.1);
+    color: inherit;
+    transform: none;
 }
 
 .btn:hover {
@@ -1093,24 +1060,230 @@ html {
     80%, 100% { content: '...'; }
 }
 
-/* Enhanced section animations */
-.content-section {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.content-section:nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-.content-section:nth-child(odd) {
-    animation-delay: 0.1s;
-}
+/* Content section */
 
 @keyframes fadeInUp {
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Home page: no animations or hover effects except hero name, image, and links */
+body.page-home .skill-card,
+body.page-home .skill-card:hover,
+body.page-home .skill-card:hover i,
+body.page-home .skill-card:hover h5 {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
+    cursor: default !important;
+}
+
+body.page-home .skill-card:hover i {
+    color: inherit !important;
+    filter: none !important;
+}
+
+body.page-home .skill-card:hover h5 {
+    color: inherit !important;
+}
+
+body.page-home .skill-card::before {
+    display: none !important;
+}
+
+body.page-home .project-card,
+body.page-home .project-card:hover,
+body.page-home .project-card:hover .project-icon,
+body.page-home .project-card:hover .project-icon i,
+body.page-home .project-card:hover .card-title {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    cursor: default !important;
+}
+
+body.page-home .project-card:hover .project-icon i,
+body.page-home .project-card:hover .card-title {
+    color: inherit !important;
+    filter: none !important;
+}
+
+body.page-home .project-card::before {
+    display: none !important;
+}
+
+body.page-home .card,
+body.page-home .card:hover,
+body.page-home .card:hover::before {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    cursor: default !important;
+}
+
+body.page-home .card::before {
+    display: none !important;
+}
+
+body.page-home .stat-item,
+body.page-home .stat-item:hover,
+body.page-home .stat-item:hover h3 {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+body.page-home .stat-item h3 {
+    color: inherit !important;
+}
+
+/* About section "Learn More" button - remove hover lift */
+body.page-home section:not(.hero-section) .btn:hover {
+    transform: none !important;
+}
+
+/* Footer - remove hover scale */
+body.page-home footer a:hover {
+    transform: none !important;
+}
+
+/* About page: no hover effects, no pointer cursor on cards */
+body.page-about .card,
+body.page-about .card:hover,
+body.page-about .card::before {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    cursor: default !important;
+}
+
+body.page-about .card::before {
+    display: none !important;
+}
+
+body.page-about .btn:hover {
+    transform: none !important;
+}
+
+body.page-about footer a:hover {
+    transform: none !important;
+}
+
+/* Skills page: no hover effects, no pointer cursor on cards */
+body.page-skills .skill-card,
+body.page-skills .skill-card:hover,
+body.page-skills .skill-card:hover i,
+body.page-skills .skill-card:hover h5 {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    cursor: default !important;
+}
+
+body.page-skills .skill-card:hover i {
+    color: inherit !important;
+    filter: none !important;
+}
+
+body.page-skills .skill-card:hover h5 {
+    color: inherit !important;
+}
+
+body.page-skills .skill-card::before {
+    display: none !important;
+}
+
+body.page-skills .card,
+body.page-skills .card:hover,
+body.page-skills .card::before {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    cursor: default !important;
+}
+
+body.page-skills .card::before {
+    display: none !important;
+}
+
+body.page-skills .btn:hover {
+    transform: none !important;
+}
+
+body.page-skills footer a:hover {
+    transform: none !important;
+}
+
+/* Projects page: no hover effects, no pointer cursor, no red outline */
+body.page-projects .project-card,
+body.page-projects .project-card:hover,
+body.page-projects .project-card:hover .project-icon,
+body.page-projects .project-card:hover .project-icon i,
+body.page-projects .project-card:hover .card-title {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: default !important;
+}
+
+body.page-projects .project-card:hover .project-icon i,
+body.page-projects .project-card:hover .card-title {
+    color: inherit !important;
+    filter: none !important;
+}
+
+body.page-projects .project-card::before {
+    display: none !important;
+}
+
+body.page-projects .card,
+body.page-projects .card:hover,
+body.page-projects .card::before {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: default !important;
+}
+
+body.page-projects .card::before {
+    display: none !important;
+}
+
+body.page-projects .btn:hover {
+    transform: none !important;
+}
+
+body.page-projects footer a:hover {
+    transform: none !important;
+}
+
+/* Contact page: no hover effects */
+body.page-contact .card,
+body.page-contact .card:hover,
+body.page-contact .card::before {
+    transform: none !important;
+    transition: none !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+body.page-contact .card::before {
+    display: none !important;
+}
+
+body.page-contact .btn:hover {
+    transform: none !important;
+}
+
+body.page-contact footer a:hover {
+    transform: none !important;
 }

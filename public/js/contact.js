@@ -48,11 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             console.log('Submitting form with data:', formData);
-            
-            // For GitHub Pages, use Formspree instead of local API
+
+            // Use Formspree for all form submissions (suitable for static hosting)
             const formspreeEndpoint = 'https://formspree.io/f/xlggyegw';
             
-            // Send data to Formspree
             const response = await fetch(formspreeEndpoint, {
                 method: 'POST',
                 headers: {
@@ -65,39 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Response status:', response.status);
             
             if (response.ok) {
-                // Success - show success message and reset form
                 console.log('Success! Message sent via Formspree');
                 showAlert('Your message has been sent successfully! I\'ll get back to you soon.', 'success', alertContainer);
                 contactForm.reset();
             } else {
-                // Try local API as fallback (for development)
-                try {
-                    const localResponse = await fetch('/api/contact', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const localData = await localResponse.json();
-                    console.log('Local API response:', localData);
-
-                    if (localResponse.ok && localData.success) {
-                        showAlert(localData.message || 'Your message has been sent successfully!', 'success', alertContainer);
-                        contactForm.reset();
-                    } else {
-                        showAlert(localData.error || 'Failed to send message. Please try again.', 'danger', alertContainer);
-                    }
-                } catch (localError) {
-                    console.error('Local API also failed:', localError);
-                    showAlert('Please set up Formspree or run the local server to send messages.', 'danger', alertContainer);
-                }
+                showAlert('Unable to send your message right now. Please try again in a moment or contact me directly at ahamed.assalk@gmail.com.', 'danger', alertContainer);
             }
         } catch (error) {
-            // Network or other error
             console.error('Error submitting form:', error);
-            showAlert('Network error. Please check your connection and try again.', 'danger', alertContainer);
+            showAlert('Network error. Please check your connection and try again, or contact me directly at ahamed.assalk@gmail.com.', 'danger', alertContainer);
         } finally {
             // Reset button state
             submitBtn.disabled = false;
