@@ -213,6 +213,12 @@ body > * {
     }
 }
 
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 .hero-buttons .btn {
     margin-top: 10px;
     position: relative;
@@ -475,6 +481,83 @@ body > * {
 .project-tech .badge {
     font-size: 0.75rem;
     padding: 0.35em 0.65em;
+}
+
+.project-thumb {
+    width: 280px;
+    min-width: 280px;
+    height: 100%;
+    min-height: 220px;
+    object-fit: contain;
+    object-position: top center;
+    display: block;
+    border-right: 1px solid rgba(15, 52, 96, 0.08);
+    background: #eef2f7;
+}
+
+.project-card-layout {
+    display: flex;
+    min-height: 100%;
+}
+
+.project-thumb-icon {
+    width: 280px;
+    min-width: 280px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2f7;
+    border-right: 1px solid rgba(15, 52, 96, 0.08);
+}
+
+.project-label {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(15, 52, 96, 0.08);
+    color: var(--accent-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.project-card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.project-card .card-title {
+    font-size: 1.2rem;
+    line-height: 1.35;
+}
+
+.project-card .card-text {
+    flex: 1 1 auto;
+}
+
+.project-actions {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .project-card-layout {
+        flex-direction: column;
+    }
+
+    .project-thumb,
+    .project-thumb-icon {
+        width: 100%;
+        min-width: 100%;
+        height: 220px;
+        min-height: 220px;
+        border-right: none;
+        border-bottom: 1px solid rgba(15, 52, 96, 0.08);
+    }
 }
 
 /* Contact Form Styles */
@@ -1218,52 +1301,6 @@ body.page-skills .btn:hover {
 }
 
 body.page-skills footer a:hover {
-    transform: none !important;
-}
-
-/* Projects page: no hover effects, no pointer cursor, no red outline */
-body.page-projects .project-card,
-body.page-projects .project-card:hover,
-body.page-projects .project-card:hover .project-icon,
-body.page-projects .project-card:hover .project-icon i,
-body.page-projects .project-card:hover .card-title {
-    animation: none !important;
-    transform: none !important;
-    transition: none !important;
-    box-shadow: var(--shadow-soft) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    cursor: default !important;
-}
-
-body.page-projects .project-card:hover .project-icon i,
-body.page-projects .project-card:hover .card-title {
-    color: inherit !important;
-    filter: none !important;
-}
-
-body.page-projects .project-card::before {
-    display: none !important;
-}
-
-body.page-projects .card,
-body.page-projects .card:hover,
-body.page-projects .card::before {
-    transform: none !important;
-    transition: none !important;
-    box-shadow: var(--shadow-soft) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    cursor: default !important;
-}
-
-body.page-projects .card::before {
-    display: none !important;
-}
-
-body.page-projects .btn:hover {
-    transform: none !important;
-}
-
-body.page-projects footer a:hover {
     transform: none !important;
 }
 
