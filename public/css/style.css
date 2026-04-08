@@ -484,31 +484,32 @@ body > * {
 }
 
 .project-thumb {
-    width: 280px;
-    min-width: 280px;
-    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    height: 220px;
     min-height: 220px;
     object-fit: contain;
     object-position: top center;
     display: block;
-    border-right: 1px solid rgba(15, 52, 96, 0.08);
+    border-right: none;
+    border-bottom: 1px solid rgba(15, 52, 96, 0.08);
     background: #eef2f7;
 }
 
 .project-card-layout {
-    display: flex;
-    min-height: 100%;
+    display: block;
 }
 
 .project-thumb-icon {
-    width: 280px;
-    min-width: 280px;
+    width: 100%;
+    min-width: 100%;
     min-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #eef2f7;
-    border-right: 1px solid rgba(15, 52, 96, 0.08);
+    border-right: none;
+    border-bottom: 1px solid rgba(15, 52, 96, 0.08);
 }
 
 .project-label {
@@ -527,7 +528,7 @@ body > * {
 .project-card .card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
 }
 
 .project-card .card-title {
@@ -544,11 +545,18 @@ body > * {
     padding-top: 0.5rem;
 }
 
-@media (max-width: 768px) {
-    .project-card-layout {
-        flex-direction: column;
-    }
+body.page-home .project-card .project-thumb {
+    width: 100%;
+    min-width: 100%;
+    height: 150px;
+    min-height: 150px;
+    object-fit: contain;
+    object-position: top center;
+    border-right: none;
+    border-bottom: 1px solid rgba(15, 52, 96, 0.08);
+}
 
+@media (max-width: 768px) {
     .project-thumb,
     .project-thumb-icon {
         width: 100%;
