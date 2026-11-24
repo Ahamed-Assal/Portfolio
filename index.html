@@ -221,6 +221,7 @@ footer{padding:40px 24px;color:var(--muted);font-size:14px;text-align:center}
 <footer>© 2026 Ahamed Assal. Websites for shops, stores and local businesses.</footer>
 
 <script>function imgFb(e){var f=(e.dataset.fb||"").split("|"),n=f.shift();if(n){e.dataset.fb=f.join("|");e.src=n}else{e.style.display="none"}}</script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href');if(/^https?:\/\//i.test(h)){e.preventDefault();var w=window.open(h,'_blank');if(w){w.opener=null}else{location.href=h}}});</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
